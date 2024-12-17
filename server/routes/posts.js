@@ -1,8 +1,9 @@
 import express from 'express'
-import { getPosts } from '../services/posts'
+import { getPosts, createPost } from '../services/posts.js'
 
 const router  = express.Router()
 
 router.get('/', getPosts)
+router.post('/', createPost)
 
 export default router
