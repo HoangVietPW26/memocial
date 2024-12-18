@@ -18,7 +18,8 @@ app.use('/posts', postRoutes)
 app.use("/", homeRoute)
 
 const PORT = process.env.PORT || 5000
-console.log(PORT)
+const URL = process.env.CONNECTION_URL
+console.log(URL)
 mongoose.connect(process.env.CONNECTION_URL)
     .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
     .catch((error) => console.log(error.messege))
