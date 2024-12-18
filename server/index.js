@@ -4,9 +4,10 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 
 import postRoutes from './routes/posts.js'
+import { config } from 'dotenv'
 
 const app = express();
-
+config();
 
 
 app.use(bodyParser.json({limit: "30mb", extended: true}))
@@ -15,10 +16,9 @@ app.use(cors())
 app.use('/posts', postRoutes)
 
 
-const CONNECTION_URL = 'mongodb+srv://nhviet26:viet2610@memocial-1.arh9t.mongodb.net/?retryWrites=true&w=majority&appName=Memocial-1'
 const PORT = process.env.PORT || 5000
 
-mongoose.connect(CONNECTION_URL)
+mongoose.connect(process.env.CONNECTION_URL)
     .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
     .catch((error) => console.log(error.messege))
 
