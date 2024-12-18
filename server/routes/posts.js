@@ -8,5 +8,4 @@ router.post('/', createPost)
 router.patch('/:id', updatePost)
 router.patch('/:id/likePost', updateLike)
 router.delete('/:id', deletePost)
-
 export default router
