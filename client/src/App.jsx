@@ -1,54 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-
-import { getPosts } from "./actions/posts.js";
-import Posts from "./components/Posts/Posts.jsx";
-import Post from "./components/Posts/Post/Post.jsx";
-import Form from "./components/Form/Form.jsx";
-import memories from "./images/memories.png";
-import useStyles from "./styles.js";
-
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Container } from "@material-ui/core";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import Home from "./components/Home/Home.jsx";
+import Navbar from "./components/Navbar/Navbar.jsx";
+import Auth from "./components/Auth/Auth.jsx";
 const App = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const [currentId, setCurrentId] = useState(null);
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId]);
   return (
-    <Container maxWidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className={classes.heading} variant="h2" align="center">
-          Memories
-        </Typography>
-        <img
-          className={classes.image}
-          src={memories}
-          alt="memories"
-          height={120}
-        />
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid
-            className={classes.mainContainer}
-            container
-            justifyContent="space-between"
-            alignItems="stretch"
-            spacing={3}
-          >
-            <Grid item xs={12} sm={7}>
-              <Posts setCurrentId={setCurrentId}></Posts>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Form currentId={currentId} setCurrentId={setCurrentId}></Form>
-            </Grid>
-          </Grid>
+    <GoogleOAuthProvider clientId="67079496792-5i08cbk7drnca37f4coa21s1umjvlh7s.apps.googleusercontent.com">
+      <BrowserRouter>
+        <Container maxWidth="lg">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/auth" element={<Auth />} />
+          </Routes>
         </Container>
-      </Grow>
-    </Container>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 };
 
