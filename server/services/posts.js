@@ -2,10 +2,15 @@ import mongoose from "mongoose"
 import PostMessege from "../models/postMessege.js"
 
 export const getPosts = async (req, res) => {
+    const {page} = req.query
     try {
-        const postMesseges = await PostMessege.find()
-        console.log(postMesseges)
-        res.status(200).json(postMesseges)
+        const LIMIT = 8
+        const startIndex = (Number(page) - 1) * LIMIT // get the start index of page
+        const total = await PostMessege.countDocuments({})
+
+        const posts = await PostMessege.find().sort({_id: -1}).limit(LIMIT).skip(startIndex)
+        // console.log(posts)
+        res.status(200).json({data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total/LIMIT)})
     } catch (error) {
         res.status(404).json({messege: error.messege})
     }
@@ -81,12 +86,10 @@ export const updateLike = async (req, res) => {
         const index = post.likedBy.findIndex((id)=> id === String(req.userId))
         if (index === -1) {
             post.likedBy.push(req.userId)
-            // post.likeCount += 1
         } else {
-            console.log(req.userId)
+            // console.log(req.userId)
             post.likedBy = post.likedBy.filter((id)=>id !== String(req.userId))  
-            console.log(post.likedBy)
-            // post.likeCount -= 1          
+            // console.log(post.likedBy)     
         }
         const updatePost = await PostMessege.findByIdAndUpdate(_id, post, {new: true})
         

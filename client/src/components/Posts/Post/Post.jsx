@@ -22,7 +22,7 @@ const Post = ({ post, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const Likes = () => {
-    console.log(post);
+    // console.log(post);
     if (post.likedBy.length > 0) {
       return post.likedBy.find(
         (like) => like === (user?.cred?.sub || user?.cred?._id)

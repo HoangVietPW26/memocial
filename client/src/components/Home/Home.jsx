@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   Container,
@@ -13,7 +13,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 import Posts from "../../components/Posts/Posts.jsx";
 import Form from "../../components/Form/Form.jsx";
-import { getPosts, getPostsBySearch } from "../../actions/posts.js";
+import { getPostsBySearch } from "../../actions/posts.js";
 import useStyles from "./styles.js";
 import Pagination from "../Pagination.jsx";
 
@@ -54,9 +54,9 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId]);
+  // useEffect(() => {
+  //   dispatch(getPosts());
+  // }, [currentId]);
   return (
     <>
       <Grow in>
@@ -104,9 +104,14 @@ const Home = () => {
                 </Button>
               </AppBar>
               <Form currentId={currentId} setCurrentId={setCurrentId}></Form>
-              <Paper className={classes.pagination} elevation={6}>
-                <Pagination />
-              </Paper>
+              {!searchQuery && !tags.length && (
+                <Paper className={classes.pagination} elevation={6}>
+                  <Pagination page={page} />
+                </Paper>
+              )}
+              {/* <Paper className={classes.pagination} elevation={6}>
+                <Pagination page={page} />
+              </Paper> */}
             </Grid>
           </Grid>
         </Container>
