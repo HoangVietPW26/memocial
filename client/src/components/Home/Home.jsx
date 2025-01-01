@@ -43,7 +43,8 @@ const Home = () => {
     setTags(tags.filter((tag) => tag !== tagToDelete));
 
   const searchPost = () => {
-    if (search.trim() || tags) {
+    console.log(search);
+    if ((search.trim() && search.trim() !== "") || tags.length > 0) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
       navigate(
         `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`

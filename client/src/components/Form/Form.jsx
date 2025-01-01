@@ -28,15 +28,21 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = (e) => {
     // e.preventDefault();
     // dispatch(createPost(postData));
-    console.log(currentId);
-    console.log({ ...postData, name: user?.cred?.name });
-    if (currentId) {
-      dispatch(updatePost(currentId, { ...postData, name: user?.cred?.name }));
-      console.log(currentId);
+    if (postData.title === "") {
+      alert("Title cannot be empty");
     } else {
-      dispatch(createPost({ ...postData, name: user?.cred?.name }));
+      console.log(currentId);
+      console.log({ ...postData, name: user?.cred?.name });
+      if (currentId) {
+        dispatch(
+          updatePost(currentId, { ...postData, name: user?.cred?.name })
+        );
+        console.log(currentId);
+      } else {
+        dispatch(createPost({ ...postData, name: user?.cred?.name }));
+      }
+      clear();
     }
-    clear();
   };
   if (!user?.cred?.name) {
     return (
@@ -70,20 +76,11 @@ const Form = ({ currentId, setCurrentId }) => {
           <Typography variant="h6">
             {currentId ? "Editing" : "Creating"} a Memory
           </Typography>
-          {/* <TextField
-            name="creator"
-            variant="outlined"
-            label="Creator"
-            fullWidth
-            value={postData.creator}
-            onChange={(e) => {
-              setPostData({ ...postData, creator: e.target.value });
-            }}
-          /> */}
           <TextField
             name="title"
             variant="outlined"
             label="Title"
+            required
             fullWidth
             value={postData.title}
             onChange={(e) => {
