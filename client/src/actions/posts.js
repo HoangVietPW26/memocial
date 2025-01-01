@@ -5,6 +5,7 @@ import { CREATE, FETCH_ALL, UPDATE, DELETE, LIKE } from '../constants/actionType
 export const getPosts = () => async (dispatch) => {
 
     try {
+        console.log("prefetch")
         const {data} = await api.fetchPosts();
         dispatch({type: FETCH_ALL, payload: data})
     } catch (error) {

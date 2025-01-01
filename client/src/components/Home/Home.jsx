@@ -12,6 +12,7 @@ const Home = () => {
   const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
+    console.log("asdasdasdasd");
     dispatch(getPosts());
   }, [currentId]);
   return (
