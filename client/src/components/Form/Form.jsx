@@ -14,7 +14,7 @@ const Form = ({ currentId, setCurrentId }) => {
     likeCount: 0,
   });
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+    currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -111,9 +111,9 @@ const Form = ({ currentId, setCurrentId }) => {
             <FileBase
               type="file"
               mutiple={false}
-              onDone={({ base64 }) =>
-                setPostData({ ...postData, selectedFile: base64 })
-              }
+              onDone={({ base64 }) => {
+                setPostData({ ...postData, selectedFile: base64 });
+              }}
             />
           </div>
           <Button

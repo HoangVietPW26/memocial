@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 import Home from "./components/Home/Home.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Auth from "./components/Auth/Auth.jsx";
@@ -9,6 +10,10 @@ import PostDetails from "./components/PostDetails/PostDetails.jsx";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
+  // const user =
+  //   jwtDecode(profile?.token).exp * 1000 < new Date().getTime()
+  //     ? profile
+  //     : null;
 
   return (
     <GoogleOAuthProvider clientId="67079496792-5i08cbk7drnca37f4coa21s1umjvlh7s.apps.googleusercontent.com">

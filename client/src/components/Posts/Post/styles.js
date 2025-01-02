@@ -21,6 +21,18 @@ export default makeStyles({
     height: '100%',
     position: 'relative',
   },
+  cardMessege : {
+    wordWrap: "break-word",
+    overflowWrap: "break-word",
+    overflow: "hidden",
+  },
+  messageText: {
+    display: '-webkit-box',
+    '-webkit-line-clamp': '4', // Show only 4 lines
+    '-webkit-box-orient': 'vertical',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
   overlay: {
     position: 'absolute',
     top: '20px',
@@ -48,5 +60,9 @@ export default makeStyles({
     padding: '0 16px 8px 16px',
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
   },
 });

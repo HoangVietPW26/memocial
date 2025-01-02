@@ -1,6 +1,17 @@
 import mongoose from "mongoose"
 import PostMessege from "../models/postMessege.js"
 
+export const getPost = async (req, res) => {
+    const {id} = req.params
+    try {
+        const post = await PostMessege.findById(id)
+        res.status(200).json(post)
+    } catch (error) {
+        console.log(error)
+        res.status(404).json({messege: error.messege})
+    }
+}
+
 export const getPosts = async (req, res) => {
     const {page} = req.query
     try {
